@@ -4,6 +4,7 @@ import { supabase } from '../Integration/Authcontext'
 
 const Filler = () => {
     const [message, setMessage] = useState('')
+    const [session, setSession] = useState([])
 
     const send = (e) => {
         e.preventDefault()
@@ -20,6 +21,24 @@ const Filler = () => {
       })
       return () => subscription.unsubscribe()
     }, [])    
+    const signIn = async() => {
+      await supabase.auth.signInWithOAuth({
+        provider: 'google'
+      })
+    }
+
+    const signOut = async () => {
+      const { error } = await supabase.auth.signOut()
+    }
+
+    if(!session) {
+      return (
+        <div className='flex flex-col items-center justify-center mt-12'>
+          <h2 className='text-white font-semibold'> Sign in with Google</h2>
+          <button className='mt-2 bg-black text-white p-2 px-3  rounded h-full cursor-pointer'>Sign In</button>
+        </div>
+      )
+    }
 
   return (
     <div className='pb-20 p-10'>
@@ -31,7 +50,7 @@ const Filler = () => {
             <span>2 users online</span>
           </div>
           <div>
-            <button className='bg-black text-white p-2 px-3  rounded h-full cursor-pointer'>sign Out</button>
+            <button onClick={signOut} className='bg-black text-white p-2 px-3  rounded h-full cursor-pointer'>sign Out</button>
           </div>
         </div>
         <div className='mt-3 p-3'>
