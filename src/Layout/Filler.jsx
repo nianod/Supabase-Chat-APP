@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { FaPaperPlane } from 'react-icons/fa'
+import { supabase } from '../Integration/Authcontext'
 
 const Filler = () => {
     const [message, setMessage] = useState('')
@@ -7,6 +8,19 @@ const Filler = () => {
     const send = (e) => {
         e.preventDefault()
     }
+  
+     useEffect(() => {
+      supabase.auth.getSession().then(({ data: { session } }) => {
+        setSession(session)
+      })
+      const {
+        data: { subscription },
+      } = supabase.auth.onAuthStateChange((_event, session) => {
+        setSession(session)
+      })
+      return () => subscription.unsubscribe()
+    }, [])    
+
   return (
     <div className='pb-20 p-10'>
       <h1 className='text-fuchsia-500 font-bold underline text-2xl text-center mt-5'>Connect with Your Loved ones</h1>
