@@ -8,8 +8,9 @@ const Filler = () => {
     const [usersOnline, setUsersOnline] = useState('')
     const [messages, setMessages] = useState([])
 
-    const send = (e) => {
+    const send = async (e) => {
         e.preventDefault()
+        supabase.channel
     }
   
      useEffect(() => {
