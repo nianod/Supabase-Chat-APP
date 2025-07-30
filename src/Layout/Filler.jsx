@@ -6,7 +6,7 @@ const Filler = () => {
     const [newMessage, setNewMessage] = useState('')
     const [session, setSession] = useState(null)
     const [usersOnline, setUsersOnline] = useState('')
-    const [messages, setNewMessages] = useState('')
+    const [messages, setMessages] = useState([])
 
     const send = (e) => {
         e.preventDefault()
@@ -44,6 +44,29 @@ const Filler = () => {
           }
         }
       })
+
+      person1.on('broadcast', {event: 'messages'}, (payload) => {
+        setMessages((prevMessages) => [...prevMessages, payload.payload])
+        console.log(messages)
+      })
+
+      person1.subscribe(async (status) => {
+        if(status === 'SUBSCRIBED') {
+          await person1.track({
+            id: session?.user?.id
+          });
+        };
+      });
+
+      person1.on('presence', {event: 'sync'}, () => {
+        const state = person1.presenceState()
+        setUsersOnline(Object.keys(state))
+      })
+
+      return () => {
+        unsubscribe()
+      }
+
     }, [session])
 
 
