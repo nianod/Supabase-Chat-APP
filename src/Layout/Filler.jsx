@@ -6,7 +6,7 @@ const Filler = () => {
     const [newMessage, setNewMessage] = useState('')
     const [session, setSession] = useState(null)
     const [usersOnline, setUsersOnline] = useState('')
-    const [messages, setNewMessages] = useState('') <div className="git commit -m ""></div>
+    const [messages, setNewMessages] = useState('')
 
     const send = (e) => {
         e.preventDefault()
@@ -28,6 +28,24 @@ const Filler = () => {
         provider: 'google'
       })
     }
+
+
+    //Sockets
+    useEffect(() => {
+      if(!session) {
+        setUsersOnline([])
+        return
+      }
+
+      const person1 = supabase.channel('person1', {
+        config: {
+          presence: {
+            key: session?.user?.id
+          }
+        }
+      })
+    }, [session])
+
 
     const signOut = async () => {
       const { error } = await supabase.auth.signOut()
