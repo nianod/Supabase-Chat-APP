@@ -8,22 +8,19 @@ const Filler = () => {
     const [usersOnline, setUsersOnline] = useState('')
     const [messages, setMessages] = useState([])
 
-    const itemsToSend = {
-      type: 'broadcast',
-      event: 'message',
-      payload: {
-        message: newMessage,
-        userName: session?.user?.user_metadata?.full_name,
-        avatar: session?.user?.user_metadata?.avatar,
-        timestamp: new Date().toLocaleString
-      }
-    }
 
     const send = async (e) => {
         e.preventDefault()
-        supabase.channel('person1').send(
-          itemsToSend
-        )
+        supabase.channel('person1').send({
+          type: 'broadcast',
+          event: 'message',
+          payload: {
+            message : newMessage,
+            userName: session?.user?.user_metadata?.full_name,
+            avatar: session?.user?.user_metadata?.avatar_url,
+            timestamp: new Date().toLocaleString()
+          }
+        })
         setNewMessage('')
     }
   
@@ -60,9 +57,9 @@ const Filler = () => {
         }
       })
 
-      person1.on('broadcast', {event: 'messages'}, (payload) => {
+      person1.on('broadcast', {event: 'message'}, (payload) => {
         setMessages((prevMessages) => [...prevMessages, payload.payload])
-        console.log(messages)
+       // console.log(messages)
       })
 
       person1.subscribe(async (status) => {
@@ -73,14 +70,14 @@ const Filler = () => {
         };
       });
 
-      person1.on('presence', {event: 'sync'}, () => {
-        const state = person1.presenceState()
-        setUsersOnline(Object.keys(state))
-      })
+      // person1.on('presence', {event: 'sync'}, () => {
+      //   const state = person1.presenceState()
+      //   setUsersOnline(Object.keys(state))
+      // })
 
-      // return () => {
-      //   unsubscribe()
-      // }
+      return () => {
+        supabase.removeChannel(person1)
+      }
 
     }, [session])
 
@@ -111,9 +108,9 @@ const Filler = () => {
             <button onClick={signOut} className='bg-black text-white p-2 px-3  rounded h-full cursor-pointer'>sign Out</button>
           </div>
         </div>
-        <div className='overflow-y-auto min-h-[450px]'>
+        <div className='p-3 overflow-y-auto min-h-[450px]'>
           {messages.map((msg, index) => (
-            <p key={index}>{msg.newMessage}</p>
+            <p  className='text-white' key={index}>{msg.message}</p>
           ))}
         </div>
         <div className='mt-3 p-3 border-t-[1.5px] border-gray-700'>
