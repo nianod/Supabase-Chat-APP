@@ -14,18 +14,14 @@ A modern, clean Realtime Chat App built with React, Tailwind CSS, Google Auth, a
 🟢 Online Status – Display number of users currently online
 
 ### 🛠️ Tech Stack
-|--------- | ------------------- | ----- |
 | Frontend |	Backend/Database |	Auth |
 | ------ | --------------------- | ----- |
 | React |	Supabase Realtime DB | Google OAuth |
-| ----- | ---------------------- | ------------ |
 | Tailwind  CSS |	Supabase sockets | Supabase Auth |
-| --------- | ---------------------- | ------------- |
 
-📸 Screenshots
-(Optional: Add a few screenshots of the chat interface, login screen, and message flow here)
 
-🧠 How It Works
+
+### 🧠 How It Works
 User signs in with Google using Supabase Auth
 
 Upon login, the app stores their avatar and name
