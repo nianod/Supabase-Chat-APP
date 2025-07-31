@@ -22,7 +22,7 @@ A modern, clean Realtime Chat App built with React, Tailwind CSS, Google Auth, a
 
 
 ### 🧠 How It Works
--User signs in with Google using Supabase Auth
+- User signs in with Google using Supabase Auth
 
 - Upon login, the app stores their avatar and name
 

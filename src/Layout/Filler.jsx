@@ -104,7 +104,7 @@ const Filler = () => {
         <div className='flex justify-between border-b-1 border-gray-300 p-3'>
           <div className='text-gray-400'>
             <p>Signed in as: {session?.user?.email}</p>
-            <span>{usersOnline.length} users online</span>
+            <p className='text-green-500'>{usersOnline.length} users online <span className='text-[10px] text-green-500'>🟢</span></p>
           </div>
           <div>
             <button onClick={signOut} className='bg-black text-white p-2 px-3  rounded h-full cursor-pointer'>sign Out</button>
