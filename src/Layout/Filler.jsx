@@ -16,7 +16,7 @@ const Filler = () => {
           event: 'message',
           payload: {
             message : newMessage,
-            userName: session?.user?.user_metadata?.full_name,
+            user_name: session?.user?.user_metadata?.full_name,
             avatar: session?.user?.user_metadata?.avatar_url,
             timestamp: new Date().toLocaleString()
           }
@@ -110,7 +110,11 @@ const Filler = () => {
         </div>
         <div className='p-3 overflow-y-auto min-h-[450px]'>
           {messages.map((msg, index) => (
-            <p  className='text-white' key={index}>{msg.message}</p>
+            <div key={index}
+              className={`w-full items-start flex ${msg?.user_name === session?.user?.email ? "justify-end" : "justify-start"} `}
+            >
+              <p>{msg.message}</p>
+            </div>
           ))}
         </div>
         <div className='mt-3 p-3 border-t-[1.5px] border-gray-700'>
