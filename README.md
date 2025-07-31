@@ -1,12 +1,40 @@
-# React + Vite
+## 💬 Realtime Chat App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, clean Realtime Chat App built with React, Tailwind CSS, Google Auth, and Supabase Realtime. Instantly connect with friends, family, or classmates — messages update live, avatars included 😄.
 
-Currently, two official plugins are available:
+### 🚀 Features
+🔐 Google Authentication – Easy sign-in with your Google account
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+⚡ Realtime Messaging – Messages appear live for all users using Supabase sockets
 
-## Expanding the ESLint configuration
+💬 User Avatars – See who’s chatting with their Google profile picture
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+🌙 Responsive UI – Styled with Tailwind CSS, works beautifully on all screen sizes
+
+🟢 Online Status – Display number of users currently online
+
+### 🛠️ Tech Stack
+|--------- | ------------------- | ----- |
+| Frontend |	Backend/Database |	Auth |
+| ------ | --------------------- | ----- |
+| React |	Supabase Realtime DB | Google OAuth |
+| ----- | ---------------------- | ------------ |
+| Tailwind  CSS |	Supabase sockets | Supabase Auth |
+| --------- | ---------------------- | ------------- |
+
+📸 Screenshots
+(Optional: Add a few screenshots of the chat interface, login screen, and message flow here)
+
+🧠 How It Works
+User signs in with Google using Supabase Auth
+
+Upon login, the app stores their avatar and name
+
+When a user sends a message:
+
+It’s stored in the Supabase DB
+
+Supabase broadcasts it via sockets to all connected users
+
+Messages appear live, styled depending on whether the message is yours or from others
+
