@@ -12,7 +12,8 @@ A modern, clean Realtime Chat App built with React, Tailwind CSS, Google Auth, a
 🌙 Responsive UI – Styled with Tailwind CSS, works beautifully on all screen sizes
 
 🟢 Online Status – Display number of users currently online
-
+ 
+ 
 ### 🛠️ Tech Stack
 | Frontend |	Backend |	Auth |
 | ------ | --------------------- | ----- |
