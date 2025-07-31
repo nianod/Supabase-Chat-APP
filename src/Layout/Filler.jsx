@@ -8,9 +8,23 @@ const Filler = () => {
     const [usersOnline, setUsersOnline] = useState('')
     const [messages, setMessages] = useState([])
 
+    const itemsToSend = {
+      type: 'broadcast',
+      event: 'message',
+      payload: {
+        message: newMessage,
+        userName: session?.user?.user_metadata?.full_name,
+        avatar: session?.user?.user_metadata?.avatar,
+        timestamp: new Date().toLocaleString
+      }
+    }
+
     const send = async (e) => {
         e.preventDefault()
-        supabase.channel
+        supabase.channel('person1').send(
+          itemsToSend
+        )
+        setNewMessage('')
     }
   
      useEffect(() => {
@@ -64,9 +78,9 @@ const Filler = () => {
         setUsersOnline(Object.keys(state))
       })
 
-      return () => {
-        unsubscribe()
-      }
+      // return () => {
+      //   unsubscribe()
+      // }
 
     }, [session])
 
@@ -74,7 +88,7 @@ const Filler = () => {
     const signOut = async () => {
       const { error } = await supabase.auth.signOut()
     }
-    console.log(session)
+    // console.log(session)
 
     if(!session) {
       return (
@@ -98,10 +112,12 @@ const Filler = () => {
           </div>
         </div>
         <div className='overflow-y-auto min-h-[450px]'>
-
+          {messages.map((msg, index) => (
+            <p key={index}>{msg.newMessage}</p>
+          ))}
         </div>
         <div className='mt-3 p-3 border-t-[1.5px] border-gray-700'>
-            <form className='gap-5 flex flex-col sm:flex-row'>
+            <form onSubmit={send} className='gap-5 flex flex-col sm:flex-row'>
                 <input type="text"
                    className='p-2 w-full bg-[#363535] rounded text-white'
                    placeholder='Type your message...'
@@ -110,7 +126,6 @@ const Filler = () => {
                 />
                 <button
                   className='text-white flex gap-1 items-center bg-black p-2  rounded h-full cursor-pointer'
-                  onClick={send}
                 >
                    Send <FaPaperPlane />
                 </button>
