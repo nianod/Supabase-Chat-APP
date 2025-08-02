@@ -18,16 +18,15 @@ const Filler = () => {
             message : newMessage,
             user_name: session?.user?.user_metadata?.full_name,
             avatar: session?.user?.user_metadata?.avatar_url,
-            timestamp: new Date().toLocaleString()
+            timestamp: new Date().toLocaleTimeString()
           }
         })
-        setMessages((prevMessages) => [
-  ...prevMessages,
+        setMessages((prevMessages) => [...prevMessages,
         {
           message: newMessage,
           user_name: session?.user?.user_metadata?.full_name,
           avatar: session?.user?.user_metadata?.avatar_url,
-          timestamp: new Date().toLocaleString()
+          timestamp: new Date().toLocaleTimeString()
         }
         ])
         setNewMessage('')
@@ -119,7 +118,7 @@ const Filler = () => {
             <button onClick={signOut} className='bg-black text-white p-2 px-3  rounded h-full cursor-pointer'>sign Out</button>
           </div>
         </div>
-      <div className='p-3  min-h-[450px]'>
+      <div className='p-3 h-[450px] flex flex-col overflow-y-auto '>
         {messages.map((msg, index) => {
           const isMyMessage = msg?.user_name === session?.user?.user_metadata?.full_name
 
@@ -131,9 +130,12 @@ const Filler = () => {
               {!isMyMessage && (
                 <img className='rounded-full w-10 h-10 mr-2' src={msg.avatar} alt="avatar" />
               )}
-              <p className={`max-w-xs text-white p-2 mt-2 rounded-lg ${isMyMessage ? "bg-blue-500" : "bg-gray-700"}`}>
-                {msg.message}
-              </p>
+              <div className={`flex flex-col max-w-xs ${isMyMessage ? 'items-end' : 'items-start'}`}>
+                <p className={` text-white p-2 mt-2 rounded-lg ${isMyMessage ? "bg-blue-500" : "bg-gray-700"}`}>
+                  {msg.message}
+                </p>
+                <span className='mt-1 text-gray-300'>{msg.timestamp}</span>
+              </div>
             </div>
             
           ) 
