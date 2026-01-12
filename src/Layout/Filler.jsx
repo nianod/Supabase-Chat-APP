@@ -15,6 +15,11 @@ const ChatApp = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
     }
 
+    const left = () => {
+        alert('Clear all the messages?')
+        window.location.reload()
+    }
+
     useEffect(() => {
         scrollToBottom()
     }, [messages])
@@ -137,8 +142,7 @@ const ChatApp = () => {
     return (
         <div className="min-h-screen bg-gray-900 p-4 md:p-6">
             <div className="max-w-6xl mx-auto">
-                {/* Header */}
-                <div className="bg-gray-800/70 backdrop-blur-xl rounded-2xl p-4 md:p-6 mb-6 border border-gray-700 shadow-xl">
+                 <div className="bg-gray-800/70 backdrop-blur-xl rounded-2xl p-4 md:p-6 mb-6 border border-gray-700 shadow-xl">
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                         <div className="flex items-center gap-4">
                             <div className="relative">
@@ -178,10 +182,8 @@ const ChatApp = () => {
                     </div>
                 </div>
 
-                {/* Chat Container */}
-                <div className="bg-gray-800/50 backdrop-blur-xl rounded-2xl border border-gray-700 shadow-2xl overflow-hidden">
-                    {/* Chat Header */}
-                    <div className="bg-gray-900/80 p-4 border-b border-gray-700">
+                 <div className="bg-gray-800/50 backdrop-blur-xl rounded-2xl border border-gray-700 shadow-2xl overflow-hidden">
+                     <div className="bg-gray-900/80 p-4 border-b border-gray-700">
                         <div className="flex items-center justify-between">
                             <div>
                                 <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">
@@ -189,14 +191,15 @@ const ChatApp = () => {
                                 </h1>
                                 <p className="text-gray-400 text-sm mt-1">Real-time messaging with everyone online</p>
                             </div>
-                            <button className="text-gray-400 cursor-pointer hover:text-white p-2 rounded-lg hover:bg-gray-700/50 transition-colors">
+                            <button 
+                             onClick={left}
+                             className="text-gray-400 cursor-pointer hover:text-white p-2 rounded-lg hover:bg-gray-700/50 transition-colors">
                                 <FaCog className="text-xl" />
                             </button>
                         </div>
                     </div>
 
-                    {/* Messages Container */}
-                    <div className="h-[500px] md:h-[550px] p-4 overflow-y-auto bg-gradient-to-b from-gray-900/30 to-gray-800/30">
+                     <div className="h-[500px] md:h-[550px] p-4 overflow-y-auto bg-gradient-to-b from-gray-900/30 to-gray-800/30">
                         {messages.length === 0 ? (
                             <div className="h-full flex flex-col items-center justify-center text-gray-500">
                                 <div className="w-24 h-24 rounded-full bg-gray-800/50 flex items-center justify-center mb-4">
@@ -245,8 +248,7 @@ const ChatApp = () => {
                         )}
                     </div>
 
-                    {/* Message Input */}
-                    <div className="p-4 border-t border-gray-700 bg-gray-900/50">
+                     <div className="p-4 border-t border-gray-700 bg-gray-900/50">
                         <form onSubmit={send} className="flex items-center gap-3">
                             <button 
                                 type="button"
@@ -287,8 +289,7 @@ const ChatApp = () => {
                             </button>
                         </form>
                         
-                        {/* Typing indicator */}
-                        {isTyping && (
+                         {isTyping && (
                             <div className="mt-2 ml-2">
                                 <span className="text-sm text-gray-400 flex items-center gap-1">
                                     <span className="flex gap-1">
@@ -303,8 +304,7 @@ const ChatApp = () => {
                     </div>
                 </div>
 
-                {/* Online Users Sidebar (for larger screens) */}
-                {usersOnline.length > 0 && (
+                 {usersOnline.length > 0 && (
                     <div className="hidden lg:block fixed right-8 top-1/2 transform -translate-y-1/2 w-64">
                         <div className="bg-gray-800/70 backdrop-blur-xl rounded-2xl p-4 border border-gray-700 shadow-xl">
                             <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
