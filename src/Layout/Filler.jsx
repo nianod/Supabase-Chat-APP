@@ -113,19 +113,19 @@ const ChatApp = () => {
 
     if (!session) {
         return (
-            <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
-                <div className="bg-gray-800/50 backdrop-blur-xl rounded-2xl p-8 md:p-12 max-w-md w-full border border-gray-700 shadow-2xl">
+            <div className="min-h-screen bg-white flex items-center justify-center p-4">
+                <div className="  backdrop-blur-xl rounded-2xl p-8 md:p-12 max-w-md w-full border border-gray-500 shadow-2xl">
                     <div className="text-center mb-8">
                         <div className="w-20 h-20 bg-gradient-to-r from-green-600 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
                             <FiSend className="text-white text-3xl" />
                         </div>
-                        <h1 className="text-3xl font-bold text-white mb-2">Welcome to ChatConnect</h1>
-                        <p className="text-gray-300">Connect with your loved ones instantly</p>
+                        <h1 className="text-3xl font-bold text-gray-800 mb-2">Welcome to ChatConnect</h1>
+                        <p className="text-[green]">Connect with your loved ones instantly</p>
                     </div>
                     
                     <button 
                         onClick={signIn}
-                        className="w-full cursor-pointer bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-xl flex items-center justify-center gap-3 transition-all duration-300 "
+                        className="w-full cursor-pointer bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-xl flex items-center justify-center gap-3 transition-all duration-300 "
                     >
                         <FaGoogle className=" " />
                         <span>Continue with Google</span>
@@ -133,7 +133,7 @@ const ChatApp = () => {
                     </button>
                     
                     <div className="mt-6 text-center">
-                        <p className="text-gray-400 text-sm">
+                        <p className="text-[green] text-sm">
                             By continuing, you agree to our Terms and Privacy Policy
                         </p>
                     </div>
@@ -143,9 +143,9 @@ const ChatApp = () => {
     }
 
     return (
-      <div className="min-h-screen bg-gray-900 p-4 md:p-6">
+      <div className="min-h-screen bg-white p-4 md:p-6">
         <div className="max-w-6xl mx-auto">
-          <div className="bg-gray-800/70 backdrop-blur-xl rounded-2xl p-4 md:p-6 mb-6 border border-gray-700 shadow-xl">
+          <div className="bg-black backdrop-blur-xl rounded-2xl p-4 md:p-6 mb-6 border border-gray-700 shadow-xl">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="flex items-center gap-4">
                 <div className="relative">
@@ -189,8 +189,8 @@ const ChatApp = () => {
             </div>
           </div>
 
-          <div className="bg-gray-800/50 backdrop-blur-xl rounded-2xl border border-gray-700 shadow-2xl overflow-hidden">
-            <div className="bg-gray-900/80 p-4 border-b border-gray-700">
+          <div className="bg-[black] backdrop-blur-xl rounded-2xl border border-gray-700 shadow-2xl overflow-hidden">
+            <div className="bg-black p-4 border-b border-gray-700">
               <div className="flex items-center justify-between">
                 <div>
                   <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">
@@ -271,7 +271,7 @@ const ChatApp = () => {
               )}
             </div>
 
-            <div className="p-4 border-t border-gray-700 bg-gray-900/50">
+            <div className="p-4 border-t border-gray-700 bg-gray-600">
               <form onSubmit={send} className="flex items-center gap-3">
                 <button
                   type="button"
@@ -285,7 +285,7 @@ const ChatApp = () => {
                   <input
                     inputRef={inputRef}
                     type="text"
-                    className="w-full bg-gray-800/70 border border-gray-600 rounded-xl py-3 px-4 pr-12 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                    className="w-full bg-white border border-gray-600 rounded-xl py-3 px-4 pr-12 text-black placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
                     placeholder="Type your message here..."
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}
@@ -296,7 +296,7 @@ const ChatApp = () => {
                     type="button"
                     onClick={() => setEmoji((prev) => !prev)}
                     title="emoji"
-                    className="absolute cursor-pointer right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
+                    className="absolute cursor-pointer right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:black"
                   >
                     <FaSmile className="text-xl" />
                   </button>
@@ -333,29 +333,12 @@ const ChatApp = () => {
                 </button>
               </form>
 
-              {isTyping && (
-                <div className="mt-2 ml-2">
-                  <span className="text-sm text-gray-400 flex items-center gap-1">
-                    <span className="flex gap-1">
-                      <span className="w-2 h-2 bg-gray-500 rounded-full animate-bounce"></span>
-                      <span
-                        className="w-2 h-2 bg-gray-500 rounded-full animate-bounce"
-                        style={{ animationDelay: "0.2s" }}
-                      ></span>
-                      <span
-                        className="w-2 h-2 bg-gray-500 rounded-full animate-bounce"
-                        style={{ animationDelay: "0.4s" }}
-                      ></span>
-                    </span>
-                    typing...
-                  </span>
-                </div>
-              )}
+                  
             </div>
           </div>
 
           {usersOnline.length > 0 && (
-            <div className="hidden lg:block fixed right-8 top-1/2 transform -translate-y-1/2 w-44">
+            <div className="hidden lg:block fixed right-8 top-1/2 transform -translate-y-1/2 w-34">
               <div className="bg-gray-800/70 backdrop-blur-xl rounded-2xl p-2 border border-gray-700 shadow-xl">
                 <span className="text-white font-semibold flex items-center gap-2">
                   <FaUsers className="text-green-400" />
